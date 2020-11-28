@@ -1,0 +1,9 @@
+geojson
+lxml
+osmapi
+pandas
+pyproj
+shapely.geometry
+shapely.ops
+numpy
+scipy.spatial

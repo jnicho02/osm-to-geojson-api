@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  runner:
+    build:
+      context: .
+      dockerfile: ./.dockerdev/Dockerfile
+    image: osm-to-geojson-api:0.0.2
+    volumes:
+      - .:/app
+
+#  uploader:
+#    image: amazon/aws-cli
+#    volumes:
+#      - .:/app
+#      - ~/.aws:/root/.aws:ro
