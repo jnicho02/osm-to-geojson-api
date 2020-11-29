@@ -11,12 +11,12 @@ plugins:
 
 custom:
   pythonRequirements:
-    dockerImage: remotepixel/amazonlinux-gdal:2.4.0
+#    dockerImage: remotepixel/amazonlinux-gdal:2.4.0
     dockerizePip: non-linux
 
 functions:
-  hello:
-    handler: handler.hello
+  boundary:
+    handler: handler.boundary
 
 package:
   include:

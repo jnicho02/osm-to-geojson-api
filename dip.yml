@@ -21,6 +21,11 @@ interaction:
     service: runner
     command: python test_handler.py
 
+  deploy:
+    description: run Serverless framework
+    service: serverless
+    command: ./app/run_deploy.sh
+
 provision:
   - dip compose down --volumes
   - dip compose up

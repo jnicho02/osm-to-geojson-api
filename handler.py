@@ -1,7 +1,7 @@
 from osm_site import OsmSite
 
 
-def hello(event, context):
+def boundary(event, context):
     site = OsmSite(event['id'])
 
     response = {

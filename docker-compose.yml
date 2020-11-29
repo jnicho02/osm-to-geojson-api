@@ -9,8 +9,8 @@ services:
     volumes:
       - .:/app
 
-#  uploader:
-#    image: amazon/aws-cli
-#    volumes:
-#      - .:/app
-#      - ~/.aws:/root/.aws:ro
+  serverless:
+    image: serverlesspolska/serverless-framework
+    volumes:
+      - .:/app
+      - ~/.aws:/root/.aws:ro
