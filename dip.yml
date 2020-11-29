@@ -1,0 +1,31 @@
+version: '6.1'
+
+compose:
+  files:
+    - docker-compose.yml
+
+interaction:
+  sh:
+    description: Open a Bash shell within a container (with dependencies up)
+    service: runner
+    command: /bin/bash
+
+  bash:
+    description: Run an arbitrary script within a container (or open a shell without deps)
+    service: runner
+    command: /bin/bash
+    compose_run_options: [no-deps]
+
+  generate:
+    description: extract geojson from OpenStreetMap
+    service: runner
+    command: python test_handler.py
+
+  deploy:
+    description: run Serverless framework
+    service: serverless
+    command: serverless deploy
+
+provision:
+  - dip compose down --volumes
+  - dip compose up

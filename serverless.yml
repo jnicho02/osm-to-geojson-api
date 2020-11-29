@@ -1,0 +1,29 @@
+service: osm-to-geojson-api
+
+provider:
+  name: aws
+  runtime: python3.6
+  stage: dev
+  region: eu-west-1
+
+plugins:
+  - serverless-python-requirements
+
+custom:
+  pythonRequirements:
+#    dockerImage: remotepixel/amazonlinux-gdal:2.4.0
+    dockerizePip: non-linux
+
+functions:
+  boundary:
+    handler: handler.boundary
+
+package:
+  include:
+    - alpha_shape.py
+    - handler.py
+    - osm_site.py
+  exclude:
+    - ".*/**"
+    - "*.*"
+    - "*/**"

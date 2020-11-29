@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  runner:
+    build:
+      context: .
+      dockerfile: ./.dockerdev/Dockerfile
+    image: osm-to-geojson-api:0.0.2
+    volumes:
+      - .:/app
+
+  serverless:
+    build:
+      context: .
+      dockerfile: ./.dockerdev/ServerlessDockerfile
+    image: serverless-framework:0.0.1
+    volumes:
+      - .:/app
+      - ~/.aws:/root/.aws:ro
