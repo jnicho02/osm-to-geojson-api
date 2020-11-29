@@ -18,7 +18,7 @@ class Wikidata():
         props = res["results"]["bindings"][0]
         self.properties = {}
         for key in props.keys():
-          self.properties[key.replace('Label','')] = props[key]['value']
+          self.properties[key.replace('Label', '')] = props[key]['value']
 
 
 w = Wikidata('Q102132154')

@@ -5,7 +5,6 @@ from wikidata import Wikidata
 def boundary(event, context):
     site = OsmSite(event['id'])
     if 'wikidata' in site.properties:
-        print("getting some Wikidata")
         wikidata_id = site.properties['wikidata']
         wikidata = Wikidata(wikidata_id)
         site.update(wikidata.properties)
@@ -17,7 +16,5 @@ def boundary(event, context):
         },
         'body': site.feature()
     }
-
-    print(response)
 
     return response
