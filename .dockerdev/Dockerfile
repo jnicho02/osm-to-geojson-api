@@ -8,6 +8,7 @@ RUN conda update conda
 RUN conda config --add channels conda-forge
 RUN conda install -c anaconda scipy
 # RUN pip install overpass
+RUN pip install qwikidata
 RUN conda install --file requirements.txt
 
 # CMD [ "python", "./local.py" ]

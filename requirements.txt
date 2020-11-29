@@ -6,4 +6,5 @@ pyproj
 shapely.geometry
 shapely.ops
 numpy
+qwikidata.sparql
 scipy.spatial

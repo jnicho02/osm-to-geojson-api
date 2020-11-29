@@ -1,2 +1,2 @@
 HWRC.geojson
-__pycache__/**
+*.pyc
