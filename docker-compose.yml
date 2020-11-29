@@ -10,7 +10,10 @@ services:
       - .:/app
 
   serverless:
-    image: serverlesspolska/serverless-framework
+    build:
+      context: .
+      dockerfile: ./.dockerdev/ServerlessDockerfile
+    image: serverless-framework:0.0.1
     volumes:
       - .:/app
       - ~/.aws:/root/.aws:ro

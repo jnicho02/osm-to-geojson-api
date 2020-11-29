@@ -24,7 +24,7 @@ interaction:
   deploy:
     description: run Serverless framework
     service: serverless
-    command: ./app/run_deploy.sh
+    command: serverless deploy
 
 provision:
   - dip compose down --volumes
