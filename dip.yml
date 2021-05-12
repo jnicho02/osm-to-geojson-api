@@ -16,15 +16,25 @@ interaction:
     command: /bin/bash
     compose_run_options: [no-deps]
 
-  generate:
+  deploy:
+    description: run Serverless framework
+    service: runner
+    command: serverless deploy
+
+  invoke:
+    description: invoke Lambda function
+    service: runner
+    command: serverless invoke --function boundary
+
+  test:
     description: extract geojson from OpenStreetMap
     service: runner
     command: python test_handler.py
 
-  deploy:
-    description: run Serverless framework
-    service: serverless
-    command: serverless deploy
+  test_endpoint:
+    description: call the http endpoint
+    service: runner
+    command: curl https://dzazcd7fsg.execute-api.eu-west-1.amazonaws.com/dev/relation/2928690
 
 provision:
   - dip compose down --volumes

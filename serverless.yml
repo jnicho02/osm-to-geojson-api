@@ -5,25 +5,54 @@ provider:
   runtime: python3.6
   stage: dev
   region: eu-west-1
+  profile: serverless-admin
+  lambdaHashingVersion: 20201221
 
 plugins:
   - serverless-python-requirements
 
 custom:
   pythonRequirements:
-#    dockerImage: remotepixel/amazonlinux-gdal:2.4.0
     dockerizePip: non-linux
 
 functions:
-  boundary:
+  relation-boundary:
     handler: handler.boundary
+    events:
+      - http:
+          path: relation/{id}
+          method: get
+          request:
+            parameters:
+              paths:
+                id: true
+  way-boundary:
+    handler: handler.boundary
+    events:
+      - http:
+          path: way/{id}
+          method: get
+          request:
+            parameters:
+              paths:
+                id: true
+  node-boundary:
+    handler: handler.boundary
+    events:
+      - http:
+          path: node/{id}
+          method: get
+          request:
+            parameters:
+              paths:
+                id: true
 
 package:
-  include:
+  patterns:
+    - "!.*/**"
+    - "!*.*"
+    - "!*/**"
     - alpha_shape.py
     - handler.py
     - osm_site.py
-  exclude:
-    - ".*/**"
-    - "*.*"
-    - "*/**"
+    - wikidata.py
