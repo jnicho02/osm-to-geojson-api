@@ -4,7 +4,7 @@ from wikidata import Wikidata
 
 
 def boundary(event, context):
-    id = event['path'].replace('/boundary/', '')
+    id = event['path']
     site = OsmSite(id)
     if 'wikidata' in site.properties:
         wikidata_id = site.properties['wikidata']
@@ -16,7 +16,7 @@ def boundary(event, context):
         'headers': {
             'Content-Type': 'application/geo+json',
         },
-        'body': json.dumps(site.feature())
+        'body': json.dumps(site.feature_collection())
     }
 
     return response

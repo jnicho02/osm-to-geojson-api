@@ -138,6 +138,19 @@ class OsmSite():
             properties=self.properties
         )
 
+    def feature_collection(self) -> geojson.FeatureCollection:
+        boundary = geojson.Feature(
+            geometry=self.geom,
+            properties=self.properties
+        )
+        features = []
+        if self.generators:
+            features = self.generators.features
+        features.append(boundary)
+        if len(features) == 1:
+            return features[0]
+        return geojson.FeatureCollection(features)
+
     def add_generator(self, feature: geojson.Feature) -> None:
         if self.generators is None:
             self.generators = geojson.FeatureCollection(features=[])
@@ -160,26 +173,6 @@ class OsmSite():
             coords.append(lonlat)
         feature = shapely.geometry.Polygon(coords)
         return feature
-
-    @staticmethod
-    def is_power_generator(node_or_way) -> bool:
-        tags = node_or_way['tag']
-        power = 'power' in tags
-        generator = 'generator' == tags
-        power_generator = power and generator
-        generator_source = 'generator:source' in tags
-        if generator_source == 'wind':
-            if 'generator:type' not in tags:
-                print(
-                    "No generator:type https://www.openstreetmap.org/node/{}"
-                    .format(node_or_way['id'])
-                )
-        elif power_generator:
-            print(
-                "No generator:source https://www.openstreetmap.org/node/{}"
-                .format(node_or_way['id'])
-            )
-        return generator_source or power_generator
 
     @staticmethod
     def is_access_track(way) -> bool:
@@ -210,6 +203,26 @@ class OsmSite():
     def is_landuse(way) -> bool:
         found = 'landuse' in way['tag'].keys()
         return found
+
+    @staticmethod
+    def is_power_generator(node_or_way) -> bool:
+        tags = node_or_way['tag']
+        power = 'power' in tags
+        generator = 'generator' == tags
+        power_generator = power and generator
+        generator_source = 'generator:source' in tags
+        if generator_source == 'wind':
+            if 'generator:type' not in tags:
+                print(
+                    "No generator:type https://www.openstreetmap.org/node/{}"
+                    .format(node_or_way['id'])
+                )
+        elif power_generator:
+            print(
+                "No generator:source https://www.openstreetmap.org/node/{}"
+                .format(node_or_way['id'])
+            )
+        return generator_source or power_generator
 
     @staticmethod
     def is_substation(node_or_way) -> bool:

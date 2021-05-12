@@ -20,6 +20,7 @@ functions:
     handler: handler.boundary
     events:
       - http:
+          cors: true
           path: relation/{id}
           method: get
           request:
@@ -30,8 +31,9 @@ functions:
     handler: handler.boundary
     events:
       - http:
-          path: way/{id}
+          cors: true
           method: get
+          path: way/{id}
           request:
             parameters:
               paths:
@@ -40,8 +42,9 @@ functions:
     handler: handler.boundary
     events:
       - http:
-          path: node/{id}
+          cors: true
           method: get
+          path: node/{id}
           request:
             parameters:
               paths:

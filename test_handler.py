@@ -66,3 +66,4 @@ def aberdeen():
         f.write(geojson.dumps(feature_collection, indent=2))
 
 bridge_of_don_recycling_centre()
+kirkby_moor_wind_farm()
