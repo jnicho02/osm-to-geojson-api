@@ -11,8 +11,10 @@ class OsmSite():
     # osm_ref format 'node/nnnnnnnnn', 'relation/nnnnnnn', 'way/nnnnnnn'
     def __init__(self, osm_ref: str):
         self.osm_ref = osm_ref
+        if self.osm_ref.startswith('/'):
+            self.osm_ref = self.osm_ref[1:]
         self.properties = {}
-        self.properties['osm_ref'] = osm_ref
+        self.properties['osm_ref'] = self.osm_ref
         self.generators = None
         try:
             if self.osm_ref.startswith('node/'):
@@ -24,14 +26,14 @@ class OsmSite():
                 self.update(node['tag'])
                 if self.is_power_generator(node):
                     point = self.point_from_node(node)
-            elif osm_ref.startswith('way/'):
-                id = osm_ref[osm_ref.index('way/') + len('way/'):]
+            elif self.osm_ref.startswith('way/'):
+                id = self.osm_ref[self.osm_ref.index('way/') + len('way/'):]
                 way = api.WayGet(id)
                 polygon = self.polygon_from_way(way)
                 self.geom = polygon
                 self.update(way['tag'])
-            elif osm_ref.startswith('relation/'):
-                id = osm_ref[osm_ref.index('relation/') + len('relation/'):]
+            elif self.osm_ref.startswith('relation/'):
+                id = self.osm_ref[self.osm_ref.index('relation/') + len('relation/'):]
                 relation = api.RelationGet(id)
                 self.update(relation['tag'])
                 points = []

@@ -21,18 +21,10 @@ class Wikidata():
           self.properties[key.replace('Label', '')] = props[key]['value']
 
 
-w = Wikidata('Q102132154')
-print(w.properties)
-
-
-
-recycling_centres = """
-        SELECT ?item ?itemLabel
-        WHERE
-        {
-          ?item wdt:P31 wd:Q27106436.
-          SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en". }
-        }"""
-
-
-
+# recycling_centres = """
+#        SELECT ?item ?itemLabel
+#        WHERE
+#        {
+#          ?item wdt:P31 wd:Q27106436.
+#          SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en". }
+#        }"""

@@ -5,15 +5,9 @@ services:
     build:
       context: .
       dockerfile: ./.dockerdev/Dockerfile
-    image: osm-to-geojson-api:0.0.2
-    volumes:
-      - .:/app
-
-  serverless:
-    build:
-      context: .
-      dockerfile: ./.dockerdev/ServerlessDockerfile
-    image: serverless-framework:0.0.1
+      args:
+        NODE_MAJOR: '14'
+    image: osm-to-geojson-api:0.0.8
     volumes:
       - .:/app
       - ~/.aws:/root/.aws:ro

@@ -3,8 +3,7 @@ lxml
 osmapi
 pandas
 pyproj
-shapely.geometry
-shapely.ops
+shapely
 numpy
-qwikidata.sparql
-scipy.spatial
+qwikidata
+scipy
